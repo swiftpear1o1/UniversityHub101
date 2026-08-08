@@ -12,12 +12,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
+      - name: Show runtime
+        run: node --version && npm --version
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund
       - name: Type check
         run: npx tsc --noEmit
       - name: Production build
