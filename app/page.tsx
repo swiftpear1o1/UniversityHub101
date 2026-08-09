@@ -2,22 +2,124 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, CalendarClock, CheckCircle2, GraduationCap, MapPin, TrendingUp } from "lucide-react";
-import { BarChart, Bar, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { BarChart, Bar, CartesianGrid, Cell, Pie, PieChart, Tooltip, XAxis, YAxis } from "recharts";
 import { Sidebar } from "@/components/Sidebar";
 import { universities } from "@/lib/universities";
-const colors: Record<string,string>={Reach:"#ef4444",Target:"#f59e0b",Safe:"#10b981"};
-const APPLICATION_KEY="universityhub-applications";
-type Application={universityId:string;status:string;finalDecision?:string};
-function loadApps():Application[]{if(typeof window==="undefined")return [];try{const raw=JSON.parse(localStorage.getItem(APPLICATION_KEY)||"[]");return Array.isArray(raw)?raw:[];}catch{return [];}}
-function dateValue(v:string){if(!v)return Number.POSITIVE_INFINITY;const p=Date.parse(v);return Number.isNaN(p)?Number.POSITIVE_INFINITY:p;}
-export default function Home(){
- const [applications,setApplications]=useState<Application[]>([]);
- useEffect(()=>{const refresh=()=>setApplications(loadApps());refresh();window.addEventListener("storage",refresh);window.addEventListener("universityhub-applications-changed",refresh);return()=>{window.removeEventListener("storage",refresh);window.removeEventListener("universityhub-applications-changed",refresh)}},[]);
- const classifications=useMemo(()=>["Reach","Target","Safe"].map(name=>({name,value:universities.filter(u=>u.classification.toLowerCase().includes(name.toLowerCase())).length})),[]);
- const countries=useMemo(()=>Array.from(new Set(universities.map(u=>u.country))).map(country=>({country,universities:universities.filter(u=>u.country===country).length})),[]);
- const upcoming=useMemo(()=>[...universities].filter(u=>u.deadline).sort((a,b)=>dateValue(a.deadline)-dateValue(b.deadline)).slice(0,5),[]);
- const tracked=applications.length;
- const counts=["Shortlisted","Preparing","Submitted","Decision"].map(stage=>({stage,count:stage==="Decision"?applications.filter(a=>a.finalDecision&&a.finalDecision!=="Not decided").length:applications.filter(a=>a.status===stage).length}));
- const stats=[["Universities",String(universities.length),"Current database",GraduationCap],["Applications",String(tracked),"Saved in tracker",CheckCircle2],["Reach / Target / Safe",`${classifications[0].value} / ${classifications[1].value} / ${classifications[2].value}`,"Classification mix",TrendingUp],["Tracked deadlines",String(universities.filter(u=>u.deadline).length),"Dates in university records",CalendarClock]];
- return <div className="min-h-screen bg-slate-50"><Sidebar/><main className="ml-64 min-h-screen"><header className="flex h-20 items-center justify-between border-b border-slate-200 bg-white px-8"><div><p className="text-sm text-slate-500">Admissions 2027</p><h1 className="text-xl font-semibold">Dashboard</h1></div><div className="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-600">Planning mode</div></header><div className="space-y-8 p-8"><section><p className="mb-1 text-sm font-medium text-blue-600">Admissions command center</p><h2 className="text-3xl font-semibold tracking-tight">Your university command center.</h2><p className="mt-2 max-w-2xl text-slate-500">Live statistics from the university database and your saved application pipeline.</p></section><section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">{stats.map(([label,value,detail,Icon])=><div key={label as string} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="mb-5 flex items-center justify-between"><span className="text-sm font-medium text-slate-500">{label as string}</span><Icon size={19} className="text-blue-600"/></div><div className="text-3xl font-semibold">{value as string}</div><div className="mt-1 text-xs text-slate-400">{detail as string}</div></div>)}</section><section className="grid gap-6 lg:grid-cols-2"><div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><h3 className="font-semibold">Reach / Target / Safe</h3><p className="mt-1 text-sm text-slate-500">Current classification mix.</p><div className="mt-4 h-64"><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={classifications} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={85} label>{classifications.map(entry=><Cell key={entry.name} fill={colors[entry.name]}/>)}</Pie><Tooltip/></PieChart></ResponsiveContainer></div></div><div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><h3 className="font-semibold">Universities by country</h3><p className="mt-1 text-sm text-slate-500">Current database distribution.</p><div className="mt-4 h-64"><ResponsiveContainer width="100%" height="100%"><BarChart data={countries}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="country" tick={{fontSize:11}}/><YAxis allowDecimals={false}/><Tooltip/><Bar dataKey="universities" fill="#2563eb" radius={[6,6,0,0]}/></BarChart></div></div></section><section className="grid gap-6 lg:grid-cols-3"><div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:col-span-2"><div className="flex items-center justify-between"><div><h3 className="font-semibold">Application pipeline</h3><p className="mt-1 text-sm text-slate-500">Live counts from the same saved records used by the Application Tracker.</p></div><Link href="/tracker" className="text-sm font-medium text-blue-600">Open tracker <ArrowUpRight className="inline" size={15}/></Link></div><div className="mt-8 grid grid-cols-4 gap-3">{counts.map(({stage,count})=><div key={stage} className="rounded-xl bg-slate-50 p-4"><div className="text-xs font-medium text-slate-500">{stage}</div><div className="mt-3 text-2xl font-semibold">{count}</div><div className="mt-1 text-xs text-slate-400">Saved applications</div></div>)}</div></div><div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><div className="flex items-center justify-between"><div><h3 className="font-semibold">Upcoming deadlines</h3><p className="mt-1 text-sm text-slate-500">From university records.</p></div><Link href="/deadlines" className="text-xs font-medium text-blue-600">View all</Link></div><div className="mt-5 space-y-3">{upcoming.map(u=><Link key={u.id} href={`/universities/${u.id}`} className="block rounded-xl bg-slate-50 p-3 hover:bg-blue-50"><div className="text-sm font-medium text-slate-800">{u.name}</div><div className="mt-1 text-xs text-slate-500">{u.deadline}</div></Link>)}</div></div></section><section className="rounded-2xl border border-blue-100 bg-blue-50 p-6"><div className="flex items-start gap-4"><MapPin className="mt-0.5 text-blue-600" size={20}/><div><h3 className="font-semibold text-slate-900">Database status</h3><p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600">Your dashboard and application tracker share the same browser-persisted application data, so status and decision changes use the same storage format.</p></div></div></section></div></main></div>;
+
+const colors: Record<string, string> = { Reach: "#ef4444", Target: "#f59e0b", Safe: "#10b981" };
+const APPLICATION_KEY = "universityhub-applications";
+type Application = { universityId: string; status: string; finalDecision?: string };
+
+function loadApps(): Application[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = JSON.parse(localStorage.getItem(APPLICATION_KEY) || "[]");
+    return Array.isArray(raw) ? raw : [];
+  } catch {
+    return [];
+  }
+}
+
+function dateValue(value: string) {
+  if (!value) return Number.POSITIVE_INFINITY;
+  const parsed = Date.parse(value);
+  return Number.isNaN(parsed) ? Number.POSITIVE_INFINITY : parsed;
+}
+
+export default function Home() {
+  const [applications, setApplications] = useState<Application[]>([]);
+
+  useEffect(() => {
+    const refresh = () => setApplications(loadApps());
+    refresh();
+    window.addEventListener("storage", refresh);
+    window.addEventListener("universityhub-applications-changed", refresh);
+    return () => {
+      window.removeEventListener("storage", refresh);
+      window.removeEventListener("universityhub-applications-changed", refresh);
+    };
+  }, []);
+
+  const classifications = useMemo(
+    () => ["Reach", "Target", "Safe"].map((name) => ({
+      name,
+      value: universities.filter((u) => u.classification.toLowerCase().includes(name.toLowerCase())).length,
+    })),
+    []
+  );
+  const countries = useMemo(
+    () => Array.from(new Set(universities.map((u) => u.country))).map((country) => ({
+      country,
+      universities: universities.filter((u) => u.country === country).length,
+    })),
+    []
+  );
+  const upcoming = useMemo(
+    () => [...universities].filter((u) => u.deadline).sort((a, b) => dateValue(a.deadline) - dateValue(b.deadline)).slice(0, 5),
+    []
+  );
+  const counts = ["Shortlisted", "Preparing", "Submitted", "Decision"].map((stage) => ({
+    stage,
+    count: stage === "Decision"
+      ? applications.filter((a) => a.finalDecision && a.finalDecision !== "Not decided").length
+      : applications.filter((a) => a.status === stage).length,
+  }));
+  const stats = [
+    ["Universities", String(universities.length), "Current database", GraduationCap],
+    ["Applications", String(applications.length), "Saved in tracker", CheckCircle2],
+    ["Reach / Target / Safe", `${classifications[0].value} / ${classifications[1].value} / ${classifications[2].value}`, "Classification mix", TrendingUp],
+    ["Tracked deadlines", String(universities.filter((u) => u.deadline).length), "Dates in university records", CalendarClock],
+  ] as const;
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      <Sidebar />
+      <main className="ml-64 min-h-screen">
+        <header className="flex h-20 items-center justify-between border-b border-slate-200 bg-white px-8">
+          <div><p className="text-sm text-slate-500">Admissions 2027</p><h1 className="text-xl font-semibold">Dashboard</h1></div>
+          <div className="rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-600">Planning mode</div>
+        </header>
+        <div className="space-y-8 p-8">
+          <section>
+            <p className="mb-1 text-sm font-medium text-blue-600">Admissions command center</p>
+            <h2 className="text-3xl font-semibold tracking-tight">Your university command center.</h2>
+            <p className="mt-2 max-w-2xl text-slate-500">Live statistics from the university database and your saved application pipeline.</p>
+          </section>
+
+          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {stats.map(([label, value, detail, Icon]) => (
+              <div key={label} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                <div className="mb-5 flex items-center justify-between"><span className="text-sm font-medium text-slate-500">{label}</span><Icon size={19} className="text-blue-600" /></div>
+                <div className="text-3xl font-semibold">{value}</div><div className="mt-1 text-xs text-slate-400">{detail}</div>
+              </div>
+            ))}
+          </section>
+
+          <section className="grid gap-6 lg:grid-cols-2">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 className="font-semibold">Reach / Target / Safe</h3><p className="mt-1 text-sm text-slate-500">Current classification mix.</p>
+              <div className="mt-4 flex h-64 justify-center"><PieChart width={500} height={250}><Pie data={classifications} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={85} label>{classifications.map((entry) => <Cell key={entry.name} fill={colors[entry.name]} />)}</Pie><Tooltip /></PieChart></div>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <h3 className="font-semibold">Universities by country</h3><p className="mt-1 text-sm text-slate-500">Current database distribution.</p>
+              <div className="mt-4 flex h-64 justify-center"><BarChart width={500} height={250} data={countries}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="country" tick={{ fontSize: 11 }} /><YAxis allowDecimals={false} /><Tooltip /><Bar dataKey="universities" fill="#2563eb" radius={[6, 6, 0, 0]} /></BarChart></div>
+            </div>
+          </section>
+
+          <section className="grid gap-6 lg:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:col-span-2">
+              <div className="flex items-center justify-between"><div><h3 className="font-semibold">Application pipeline</h3><p className="mt-1 text-sm text-slate-500">Live counts from the same saved records used by the Application Tracker.</p></div><Link href="/tracker" className="text-sm font-medium text-blue-600">Open tracker <ArrowUpRight className="inline" size={15} /></Link></div>
+              <div className="mt-8 grid grid-cols-4 gap-3">{counts.map(({ stage, count }) => <div key={stage} className="rounded-xl bg-slate-50 p-4"><div className="text-xs font-medium text-slate-500">{stage}</div><div className="mt-3 text-2xl font-semibold">{count}</div><div className="mt-1 text-xs text-slate-400">Saved applications</div></div>)}</div>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div className="flex items-center justify-between"><div><h3 className="font-semibold">Upcoming deadlines</h3><p className="mt-1 text-sm text-slate-500">From university records.</p></div><Link href="/deadlines" className="text-xs font-medium text-blue-600">View all</Link></div>
+              <div className="mt-5 space-y-3">{upcoming.map((u) => <Link key={u.id} href={`/universities/${u.id}`} className="block rounded-xl bg-slate-50 p-3 hover:bg-blue-50"><div className="text-sm font-medium text-slate-800">{u.name}</div><div className="mt-1 text-xs text-slate-500">{u.deadline}</div></Link>)}</div>
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-blue-100 bg-blue-50 p-6"><div className="flex items-start gap-4"><MapPin className="mt-0.5 text-blue-600" size={20} /><div><h3 className="font-semibold text-slate-900">Database status</h3><p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600">Your dashboard and application tracker share the same browser-persisted application data, so status and decision changes use the same storage format.</p></div></div></section>
+        </div>
+      </main>
+    </div>
+  );
 }
