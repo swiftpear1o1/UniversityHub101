@@ -11,7 +11,7 @@ const KEY = "universityhub-applications";
 const statuses = ["Shortlisted","Preparing","Submitted","Interview","Offer","Rejected","Withdrawn"];
 const yesNo = ["Not started","In progress","Complete","Not applicable"];
 function load(): Application[] { if (typeof window === "undefined") return []; try { const parsed = JSON.parse(localStorage.getItem(KEY) || "[]"); return Array.isArray(parsed) ? parsed : []; } catch { return []; } }
-function save(items: Application[]) { localStorage.setItem(KEY, JSON.stringify(items)); }
+function save(items: Application[]) { localStorage.setItem(KEY, JSON.stringify(items)); window.dispatchEvent(new Event("universityhub-applications-changed")); }
 
 export default function TrackerPage() {
   const [items, setItems] = useState<Application[]>(load);
