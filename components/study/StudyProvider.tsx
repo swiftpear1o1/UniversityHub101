@@ -132,4 +132,3 @@ export function setTaskCompletion(
 export function getChecklistValue(state: TrackerState, projectId: ProjectId, itemId: string): boolean {
   return Boolean(state.checklist[projectId]?.[itemId]);
 }
-

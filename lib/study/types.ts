@@ -71,4 +71,3 @@ export type StatusSummary = {
   overdueEvent?: CalendarEvent;
   finalDeadline?: CalendarEvent;
 };
-

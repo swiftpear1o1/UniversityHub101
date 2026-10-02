@@ -6,4 +6,3 @@ export function ProgressBar({ value, color = "#2563eb", className = "" }: { valu
     </div>
   );
 }
-

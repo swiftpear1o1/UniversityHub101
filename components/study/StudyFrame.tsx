@@ -39,7 +39,7 @@ export function StudyFrame({ children }: { children: ReactNode }) {
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-slate-200 bg-white lg:flex">
         <div className="flex h-20 items-center gap-3 border-b border-slate-100 px-5">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white"><GraduationCap size={21}/></div>
-          <div className="min-w-0"><div className="truncate text-sm font-bold tracking-tight">IB Command Center</div><div className="mt-0.5 text-xs text-slate-500">Study � IA � Coursework</div></div>
+          <div className="min-w-0"><div className="truncate text-sm font-bold tracking-tight">IB Command Center</div><div className="mt-0.5 text-xs text-slate-500">Study · IA · Coursework</div></div>
         </div>
         <div className="px-5 pt-6"><div className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400">Workspace</div></div>
         <nav aria-label="Study tracker navigation" className="flex-1 space-y-1 overflow-y-auto px-3 py-3">
@@ -57,7 +57,7 @@ export function StudyFrame({ children }: { children: ReactNode }) {
       <main className="min-h-screen lg:ml-64">
         <header className="sticky top-0 z-20 flex h-[68px] items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur sm:px-7">
           <div className="flex items-center gap-3"><div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white lg:hidden"><GraduationCap size={19}/></div><div><p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">IB Study & IA Tracker</p><h1 className="text-sm font-semibold text-slate-900 sm:text-base">{pageName}</h1></div></div>
-          <div className="flex items-center gap-2"><span className="hidden rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600 sm:inline-flex">2026-27</span><button onClick={toggleTheme} className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition hover:bg-slate-50" aria-label={`Switch to ${state.theme === "dark" ? "light" : "dark"} mode`}>{state.theme === "dark" ? <Sun size={17}/> : <Moon size={17}/>}</button></div>
+          <div className="flex items-center gap-2"><span className="hidden rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600 sm:inline-flex">2026–27</span><button onClick={toggleTheme} className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition hover:bg-slate-50" aria-label={`Switch to ${state.theme === "dark" ? "light" : "dark"} mode`}>{state.theme === "dark" ? <Sun size={17}/> : <Moon size={17}/>}</button></div>
         </header>
         <div className="mx-auto max-w-7xl px-4 py-6 pb-28 sm:px-7 sm:py-8 sm:pb-28 lg:pb-10">{children}</div>
       </main>
@@ -75,4 +75,3 @@ export function StudyFrame({ children }: { children: ReactNode }) {
     </div>
   );
 }
-

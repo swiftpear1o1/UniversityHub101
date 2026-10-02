@@ -10,7 +10,7 @@ import { displayDate, eventSortDate, getDayTaskStats, getDaysCompleted, getMostU
 import { SUBJECTS } from "@/lib/study/types";
 
 const subjectColors: Record<string, string> = { Physics: "#2563eb", Mathematics: "#7c3aed", Chemistry: "#059669", Spanish: "#ea580c", English: "#4f46e5", Economics: "#d97706" };
-const subjectIcons: Record<string, string> = { Physics: "?", Mathematics: "�", Chemistry: "??", Spanish: "????", English: "??", Economics: "??" };
+const subjectIcons: Record<string, string> = { Physics: "⚡", Mathematics: "∑", Chemistry: "🧪", Spanish: "🇪🇸", English: "✍️", Economics: "📈" };
 
 function ProgressRing({ value }: { value: number }) {
   const circumference = 2 * Math.PI * 39;
@@ -42,8 +42,8 @@ export default function IBDashboard() {
 
   return <div className="space-y-7">
     <section className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-      <div><div className="mb-2 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700"><Sparkles size={13}/> Your personal IB command center</div><h2 className="text-3xl font-bold tracking-tight sm:text-[34px]">Today, with a plan.</h2><p className="mt-1.5 text-sm text-slate-500">{dateLabel} <span className="mx-1.5 text-slate-300">�</span> Academic year 2026-27</p></div>
-      <Link href="/ib/daily-tasks" className="inline-flex w-fit items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800">Open today's tasks <ArrowRight size={16}/></Link>
+      <div><div className="mb-2 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700"><Sparkles size={13}/> Your personal IB command center</div><h2 className="text-3xl font-bold tracking-tight sm:text-[34px]">Today, with a plan.</h2><p className="mt-1.5 text-sm text-slate-500">{dateLabel} <span className="mx-1.5 text-slate-300">·</span> Academic year 2026–27</p></div>
+      <Link href="/ib/daily-tasks" className="inline-flex w-fit items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800">Open today’s tasks <ArrowRight size={16}/></Link>
     </section>
 
     <section className="grid gap-4 xl:grid-cols-[1.4fr_1fr]">
@@ -70,7 +70,7 @@ export default function IBDashboard() {
       </div>
 
       <div className={`relative overflow-hidden rounded-3xl border p-5 shadow-sm sm:p-7 ${urgent?.summary.status === "Behind" ? "border-rose-200 bg-rose-50" : urgent?.summary.status === "At Risk" ? "border-amber-200 bg-amber-50" : "border-sky-200 bg-sky-50"}`}>
-        <div className="flex items-start justify-between gap-3"><div><div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-slate-500"><Target size={15}/> Today's IA priority</div><h3 className="mt-3 text-2xl font-bold tracking-tight">{urgentProject ? `${urgentProject.icon} ${urgentProject.name}` : "All caught up"}</h3></div>{urgent && <StatusBadge status={urgent.summary.status}/>}</div>
+        <div className="flex items-start justify-between gap-3"><div><div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-slate-500"><Target size={15}/> Today’s IA priority</div><h3 className="mt-3 text-2xl font-bold tracking-tight">{urgentProject ? `${urgentProject.icon} ${urgentProject.name}` : "All caught up"}</h3></div>{urgent && <StatusBadge status={urgent.summary.status}/>}</div>
         {urgentProject && urgent ? <>
           <p className="mt-2 text-sm leading-6 text-slate-600">{urgent.summary.status === "Behind" ? "A planner milestone is past due. Update your checklist to bring the schedule into focus." : urgent.summary.status === "At Risk" ? "This milestone is approaching. Choose one concrete next step today." : "Your next project milestone is on the horizon."}</p>
           <div className="mt-5 rounded-2xl border border-white/80 bg-white/70 p-4">
@@ -81,7 +81,7 @@ export default function IBDashboard() {
             <ProgressBar value={urgent.summary.progress} color={urgentProject.color} className="mt-3"/>
           </div>
           <Link href="/ib/ia-tracker" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-800 hover:underline">Update IA progress <ArrowRight size={15}/></Link>
-        </> : <p className="mt-3 text-sm text-slate-600">Every project checklist is complete. You can use today's focus for exam practice or a weekly review.</p>}
+        </> : <p className="mt-3 text-sm text-slate-600">Every project checklist is complete. You can use today’s focus for exam practice or a weekly review.</p>}
       </div>
     </section>
 
@@ -99,7 +99,7 @@ export default function IBDashboard() {
             <div className="mt-3 flex justify-between text-[11px] text-slate-500"><span>Main {stats.mainDone}/{stats.mainTotal}</span><span>Extra {stats.extraDone}/{stats.extraTotal}</span></div>
             <div className="mt-3 border-t border-slate-100 pt-2.5">
               {tasks.slice(0,1).map((task)=><label key={task.id} className="flex cursor-pointer items-center gap-2 text-xs text-slate-600"><input className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" type="checkbox" checked={task.completed} onChange={(e)=>toggleTask(subject,task.id,"main",e.target.checked)}/><span className={task.completed?"text-slate-400 line-through":""}>{task.title}</span></label>)}
-              {extra.slice(0,1).map((task)=><label key={task.id} className="mt-2 flex cursor-pointer items-center gap-2 text-xs text-slate-500"><input className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" type="checkbox" checked={task.completed} onChange={(e)=>toggleTask(subject,task.id,"extra",e.target.checked)}/><span>Extra � {task.title}</span></label>)}
+              {extra.slice(0,1).map((task)=><label key={task.id} className="mt-2 flex cursor-pointer items-center gap-2 text-xs text-slate-500"><input className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" type="checkbox" checked={task.completed} onChange={(e)=>toggleTask(subject,task.id,"extra",e.target.checked)}/><span>Extra · {task.title}</span></label>)}
             </div>
           </div>;
         })}
@@ -107,7 +107,7 @@ export default function IBDashboard() {
     </section>
 
     <section>
-      <div className="mb-3 flex items-end justify-between"><div><h3 className="text-lg font-bold">IA & Coursework</h3><p className="mt-0.5 text-sm text-slate-500">Eight separate project checklists against the 2026-27 school calendar.</p></div><Link href="/ib/ia-tracker" className="inline-flex items-center gap-1 text-sm font-semibold text-blue-700">Open tracker <ArrowRight size={15}/></Link></div>
+      <div className="mb-3 flex items-end justify-between"><div><h3 className="text-lg font-bold">IA & Coursework</h3><p className="mt-0.5 text-sm text-slate-500">Eight separate project checklists against the 2026–27 school calendar.</p></div><Link href="/ib/ia-tracker" className="inline-flex items-center gap-1 text-sm font-semibold text-blue-700">Open tracker <ArrowRight size={15}/></Link></div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {PROJECTS.map((project)=>{
           const summary = getProjectSummary(project,state,today);
@@ -141,4 +141,3 @@ export default function IBDashboard() {
     </section>
   </div>;
 }
-

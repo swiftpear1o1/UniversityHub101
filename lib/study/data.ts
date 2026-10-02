@@ -5,7 +5,7 @@ export const DEFAULT_START_DATE = "2026-10-03";
 
 export const PROJECTS: ProjectDefinition[] = [
   {
-    id: "physics-ia", name: "Physics IA", icon: "?", color: "#2563eb", description: "Independent investigation, from research question through final submission.",
+    id: "physics-ia", name: "Physics IA", icon: "⚡", color: "#2563eb", description: "Independent investigation, from research question through final submission.",
     checklist: [
       { id: "research-question", label: "Research question finalized", group: "planning" },
       { id: "background", label: "Background research completed", group: "planning" },
@@ -26,7 +26,7 @@ export const PROJECTS: ProjectDefinition[] = [
     ],
   },
   {
-    id: "math-ia", name: "Mathematics IA", icon: "�", color: "#7c3aed", description: "A focused exploration with a clear mathematical approach.",
+    id: "math-ia", name: "Mathematics IA", icon: "∑", color: "#7c3aed", description: "A focused exploration with a clear mathematical approach.",
     checklist: [
       { id: "topic", label: "Topic selected", group: "planning" },
       { id: "research-question", label: "Research question finalized", group: "planning" },
@@ -41,7 +41,7 @@ export const PROJECTS: ProjectDefinition[] = [
     ],
   },
   {
-    id: "chemistry-ia", name: "Chemistry IA", icon: "??", color: "#059669", description: "Experimental investigation with separate data and writing progress.",
+    id: "chemistry-ia", name: "Chemistry IA", icon: "🧪", color: "#059669", description: "Experimental investigation with separate data and writing progress.",
     checklist: [
       { id: "research-question", label: "Research question finalized", group: "planning" },
       { id: "background", label: "Background research completed", group: "planning" },
@@ -62,7 +62,7 @@ export const PROJECTS: ProjectDefinition[] = [
     ],
   },
   {
-    id: "economics-ia", name: "Economics IA", icon: "??", color: "#d97706", description: "Commentaries built around current articles, theory, analysis, and evaluation.",
+    id: "economics-ia", name: "Economics IA", icon: "📈", color: "#d97706", description: "Commentaries built around current articles, theory, analysis, and evaluation.",
     checklist: [
       { id: "article", label: "Article selected", group: "planning" },
       { id: "plan", label: "Commentary plan finalized", group: "planning" },
@@ -77,7 +77,7 @@ export const PROJECTS: ProjectDefinition[] = [
     ],
   },
   {
-    id: "physics-ee", name: "Physics EE", icon: "??", color: "#0891b2", description: "Physics Extended Essay milestones tracked separately from the Physics IA.",
+    id: "physics-ee", name: "Physics EE", icon: "⚛️", color: "#0891b2", description: "Physics Extended Essay milestones tracked separately from the Physics IA.",
     checklist: [
       { id: "data-collection", label: "Data collection completed", group: "data" },
       { id: "word-count", label: "Approximately 1,500 words completed", group: "writing" },
@@ -90,7 +90,7 @@ export const PROJECTS: ProjectDefinition[] = [
     ],
   },
   {
-    id: "tok-essay", name: "TOK Essay", icon: "??", color: "#db2777", description: "Essay, teacher interactions, and TK/PPF work in one tracker.",
+    id: "tok-essay", name: "TOK Essay", icon: "🧠", color: "#db2777", description: "Essay, teacher interactions, and TK/PPF work in one tracker.",
     checklist: [
       { id: "title", label: "Prescribed title selected", group: "planning" },
       { id: "teacher-1", label: "Initial teacher interaction completed", group: "planning" },
@@ -105,7 +105,7 @@ export const PROJECTS: ProjectDefinition[] = [
     ],
   },
   {
-    id: "english-hle", name: "English HLE / coursework", icon: "??", color: "#4f46e5", description: "English A HLE drafts, moderation, and final coursework period.",
+    id: "english-hle", name: "English HLE / coursework", icon: "✍️", color: "#4f46e5", description: "English A HLE drafts, moderation, and final coursework period.",
     checklist: [
       { id: "first-draft", label: "HLE first draft completed", group: "writing" },
       { id: "november-submit", label: "19 November submission milestone completed", group: "submission" },
@@ -114,7 +114,7 @@ export const PROJECTS: ProjectDefinition[] = [
     ],
   },
   {
-    id: "language-io", name: "Language B IO / coursework", icon: "???", color: "#ea580c", description: "Language B coursework milestone and final Individual Oral.",
+    id: "language-io", name: "Language B IO / coursework", icon: "🗣️", color: "#ea580c", description: "Language B coursework milestone and final Individual Oral.",
     checklist: [
       { id: "preparation", label: "IO preparation completed", group: "planning" },
       { id: "final-io", label: "Final IO completed", group: "submission" },
@@ -130,7 +130,7 @@ export const CALENDAR_EVENTS: CalendarEvent[] = [
   { id: "english-hle-first", projectId: "english-hle", title: "HLE First Draft", date: "2026-09-30", itemId: "first-draft", color: "#4f46e5", details: "English A Higher Level Essay first draft." },
   { id: "economics-sept", projectId: "economics-ia", title: "Commentary: article selection and plan finalisation", date: "2026-09-30", itemId: "article", color: "#d97706", details: "Economics commentary article selection and plan finalisation." },
   { id: "math-plan", projectId: "math-ia", title: "Final plan submission", date: "2026-09-16", itemId: "research-question", color: "#7c3aed", details: "Mathematics IA final plan submission." },
-  { id: "physics-ee-reflection", projectId: "physics-ee", title: "EE first reflection", date: "2026-09-28", dateLabel: "28-29 Sep", itemId: "reflection-1", color: "#0891b2", details: "Physics EE reflection window shown on the school planner (28-29 September)." },
+  { id: "physics-ee-reflection", projectId: "physics-ee", title: "EE first reflection", date: "2026-09-28", dateLabel: "28–29 Sep", itemId: "reflection-1", color: "#0891b2", details: "Physics EE reflection window shown on the school planner (28–29 September)." },
   { id: "tok-october", projectId: "tok-essay", title: "First teacher interaction, TK/PPF, and outline", date: null, month: "2026-10", dateLabel: "October", color: "#db2777", details: "Complete the first teacher interaction, complete or update TK/PPF work, and work on the TOK essay outline. The planner gives the month but no exact day." },
   { id: "math-first-draft", projectId: "math-ia", title: "Mathematics IA First Draft", date: "2026-10-21", itemId: "first-draft", color: "#7c3aed", details: "Submit the Mathematics IA first draft." },
   { id: "economics-macro", projectId: "economics-ia", title: "Economics Macro Commentary", date: "2026-10-22", itemId: "full-draft", color: "#d97706", details: "Macro Commentary deadline." },
@@ -166,7 +166,7 @@ const TOPICS: Record<SubjectId, string[]> = {
   Physics: ["Kinematics", "Forces", "Momentum", "Work, energy & power", "Circular motion", "Rotational motion", "Gravitational fields", "Electric fields", "Magnetic fields", "Charged-particle motion", "Electromagnetic induction", "Relativity", "Data-based questions", "Paper 1 practice", "Paper 2 practice", "Mixed timed practice"],
   Mathematics: ["Differentiation", "Integration", "Functions", "Algebra", "Binomial theorem", "Sequences", "Probability", "Statistics", "Calculus applications", "Paper 1 practice", "Paper 2 practice", "Mixed problem set"],
   Chemistry: ["Atomic structure", "Bonding", "Stoichiometry", "Energetics", "Kinetics", "Equilibrium", "Acids and bases", "Redox", "Organic chemistry", "Reaction mechanisms", "Spectroscopy", "Data-based questions", "Calculations", "Paper 1 practice", "Paper 2 practice"],
-  Spanish: ["Vocabulary retrieval", "Grammar review", "Reading comprehension", "Listening practice", "Speaking practice", "Writing practice", "Tecnolog�a", "Medios de comunicaci�n", "Mi barrio", "Connectors", "Tenses", "IB writing task"],
+  Spanish: ["Vocabulary retrieval", "Grammar review", "Reading comprehension", "Listening practice", "Speaking practice", "Writing practice", "Tecnología", "Medios de comunicación", "Mi barrio", "Connectors", "Tenses", "IB writing task"],
   English: ["Literary analysis", "Close reading", "Character", "Themes", "Literary devices", "Comparison", "PEEL paragraph", "Thesis writing", "Paper 2 planning", "Timed writing", "Evidence selection", "Global issues"],
   Economics: ["Demand and supply", "Elasticity", "Market failure", "Government intervention", "Externalities", "Public goods", "Market structures", "Macroeconomic indicators", "AD/AS", "Inflation", "Unemployment", "Economic growth", "Fiscal policy", "Monetary policy", "International economics", "Development", "Diagrams", "Case studies", "Evaluation", "Paper 2 practice"],
 };
@@ -223,4 +223,3 @@ export function getCurrentDayIndex(startDate: string, today = getLocalISODate())
   const current = Date.UTC(ty, tm - 1, td);
   return Math.min(30, Math.max(1, Math.floor((current - start) / 86_400_000) + 1));
 }
-

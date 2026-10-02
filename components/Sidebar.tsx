@@ -29,4 +29,3 @@ export function Sidebar() {
     <div className="border-t border-slate-100 p-4"><Link href="/settings" className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium ${pathname==="/settings"?"bg-blue-50 text-blue-700":"text-slate-600 hover:bg-slate-50"}`}><Settings size={18}/>Admissions Settings</Link></div>
   </aside>;
 }
-

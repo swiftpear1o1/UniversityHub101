@@ -33,9 +33,8 @@ The app is a standard Next.js project and can be deployed to Vercel or another N
 
 Tracker state is saved in this browser's `localStorage` under `ib-command-center-v1`. This includes daily tasks and custom tasks, checklist progress, planner date edits, weekly milestones, study hours, focus ratings, notes, theme, and tracker start date. Data is local to the current browser profile and does not sync between devices.
 
-- Open **Settings  Export data as JSON** to download a backup.
-- Use **Settings  Import JSON** to restore a tracker backup in this browser.
-- Use **Settings  Reset tracker data** to clear saved tracker data and restore the starter plan. The app asks for confirmation before resetting.
+- Open **Settings → Export data as JSON** to download a backup.
+- Use **Settings → Import JSON** to restore a tracker backup in this browser.
+- Use **Settings → Reset tracker data** to clear saved tracker data and restore the starter plan. The app asks for confirmation before resetting.
 
-The tracker uses the dates and month windows included in the supplied 2026-27 planner notes. Where the planner specified only a month, the calendar keeps the event at month level until an exact date is entered.
-
+The tracker uses the dates and month windows included in the supplied 2026–27 planner notes. Where the planner specified only a month, the calendar keeps the event at month level until an exact date is entered.

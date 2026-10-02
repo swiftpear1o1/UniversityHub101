@@ -56,4 +56,3 @@ export default function StudySettingsPage(){
     <section className="rounded-3xl border border-rose-200 bg-white p-5 shadow-sm sm:p-6"><div className="flex items-start gap-3"><div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-700"><AlertTriangle size={18}/></div><div className="flex-1"><h3 className="font-bold text-slate-900">Reset all tracker data</h3><p className="mt-1 max-w-2xl text-sm leading-5 text-slate-500">Clear saved study completion, custom tasks, IA progress, calendar date edits, weekly reviews, and daily updates. The confirmation dialog gives you a chance to cancel.</p><button onClick={resetData} className="mt-4 inline-flex items-center gap-2 rounded-xl border border-rose-200 bg-white px-4 py-2.5 text-sm font-semibold text-rose-700 hover:bg-rose-50"><RotateCcw size={15}/>Reset tracker data</button></div></div></section>
   </div>;
 }
-

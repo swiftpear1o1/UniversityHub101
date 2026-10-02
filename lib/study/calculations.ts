@@ -155,4 +155,3 @@ export function formatMonth(month: string): string {
   const [year, number] = month.split("-").map(Number);
   return new Intl.DateTimeFormat("en-IN", { month: "long", year: "numeric" }).format(new Date(year, number - 1, 1));
 }
-

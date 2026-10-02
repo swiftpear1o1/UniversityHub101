@@ -18,7 +18,7 @@ export default function WeeklyReviewPage() {
   }
 
   return <div className="space-y-6">
-    <section className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><div className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">Four-week plan</div><h2 className="mt-1 text-3xl font-bold tracking-tight">Weekly Review</h2><p className="mt-1.5 text-sm text-slate-500">Mark the weekly milestones you've completed and spot your next focus.</p></div><div className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 shadow-sm"><div className="text-xs text-slate-400">Milestones completed</div><div className="mt-0.5 text-lg font-bold">{completed}<span className="ml-1 text-sm font-medium text-slate-400">/ {allGoals}</span></div></div></section>
+    <section className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><div className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-700">Four-week plan</div><h2 className="mt-1 text-3xl font-bold tracking-tight">Weekly Review</h2><p className="mt-1.5 text-sm text-slate-500">Mark the weekly milestones you’ve completed and spot your next focus.</p></div><div className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 shadow-sm"><div className="text-xs text-slate-400">Milestones completed</div><div className="mt-0.5 text-lg font-bold">{completed}<span className="ml-1 text-sm font-medium text-slate-400">/ {allGoals}</span></div></div></section>
     <section className="grid gap-4 xl:grid-cols-2">
       {WEEKLY_REVIEWS.map((week,index)=>{
         const done=week.goals.filter((_,goalIndex)=>state.weeks[String(week.week)]?.[`goal-${goalIndex}`]).length;
@@ -30,7 +30,6 @@ export default function WeeklyReviewPage() {
         </article>;
       })}
     </section>
-    <div className="flex items-center gap-2 rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm text-emerald-900"><BookOpenCheck size={17}/>Each week's review saves locally and stays available after a refresh.</div>
+    <div className="flex items-center gap-2 rounded-2xl border border-emerald-100 bg-emerald-50 p-4 text-sm text-emerald-900"><BookOpenCheck size={17}/>Each week’s review saves locally and stays available after a refresh.</div>
   </div>;
 }
-

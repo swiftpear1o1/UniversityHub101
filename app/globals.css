@@ -51,4 +51,3 @@ html[data-theme="dark"] input, html[data-theme="dark"] select, html[data-theme="
 html[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]), html[data-theme="dark"] select, html[data-theme="dark"] textarea { background-color: #111b2e; border-color: #33445d; }
 html[data-theme="dark"] input::placeholder, html[data-theme="dark"] textarea::placeholder { color: #71829a; }
 html[data-theme="dark"] .shadow-sm, html[data-theme="dark"] .shadow-md { --tw-shadow-color: rgb(0 0 0 / 0.16); }
-

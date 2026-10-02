@@ -9,7 +9,7 @@ import { getDayTaskStats } from "@/lib/study/calculations";
 import { SUBJECTS, type StudyTask, type SubjectId } from "@/lib/study/types";
 
 const colors: Record<SubjectId, string> = { Physics: "#2563eb", Mathematics: "#7c3aed", Chemistry: "#059669", Spanish: "#ea580c", English: "#4f46e5", Economics: "#d97706" };
-const icons: Record<SubjectId, string> = { Physics: "?", Mathematics: "�", Chemistry: "??", Spanish: "????", English: "??", Economics: "??" };
+const icons: Record<SubjectId, string> = { Physics: "⚡", Mathematics: "∑", Chemistry: "🧪", Spanish: "🇪🇸", English: "✍️", Economics: "📈" };
 
 function TaskRow({ task, subject, day, bucket, onEdit, onDelete }: { task: StudyTask; subject: SubjectId; day: number; bucket: "main" | "extra"; onEdit: (task: StudyTask) => void; onDelete: (task: StudyTask) => void }) {
   const { update } = useStudyTracker();
@@ -113,4 +113,3 @@ export default function DailyTasksPage() {
     <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"><div><div className="font-semibold">Custom tasks stay attached to this day.</div><div className="mt-1 text-xs text-slate-500">Add, edit, remove, and complete tasks without changing the preloaded study plan.</div></div><div className="flex items-center gap-2 text-xs text-slate-400"><CirclePlus size={15}/> Saved automatically</div></div>
   </div>;
 }
-
