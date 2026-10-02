@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+.vercel/
+.turbo/
+coverage/
+*.tsbuildinfo
+*.log
+pnpm-debug.log*
+.env*
+!.env.example
+

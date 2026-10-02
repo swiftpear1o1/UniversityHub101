@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { StudyProvider } from "@/components/study/StudyProvider";
 
 export const metadata: Metadata = {
-  title: "UniversityHub",
-  description: "A personal university admissions command center.",
+  title: "IB Study & IA Tracker",
+  description: "A 30-day IB study planner and IA, Extended Essay, TOK, and coursework command center.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body><StudyProvider>{children}</StudyProvider></body>
     </html>
   );
 }
+
